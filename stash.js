@@ -1,10 +1,6 @@
 "use strict";
 
-/*
-
-            THIS IS A HEAVY WORK IN PROGRESS, SUPREME DUDES
-
-*/
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 const request = require('request');
 const config = require('./config.json');
@@ -22,12 +18,13 @@ export default class Stash {
     }
 
     getPullRequests(callBack) {
-
+		const url = this.root + this.api + this.projectName + '/repos/' + this.repo + '/pull-requests';
+		console.log('getPullRequests', url);
         var opts = {
-            url: this.root + this.api + this.projectName + '/repos/' + this.repo + '/pull-requests',
+            url: url,
             auth: {
-                user: config.user,
-                password: config.password
+                user: config.stashUser,
+                password: config.stashPassword
             }
         };
         request(opts, function(error, response, body) {
@@ -50,15 +47,15 @@ var stashClient = new Stash({
 });
 
 stashClient.getPullRequests((err, resp) => {
-    if (response === undefined) {
+    if (resp === undefined) {
         console.log('Stash returned undefined');
         return;
     }
     if(err) {
         console.log('Stash returned an error', err);
     }
-    for (var i = 0; i < response.values.length; i++) {
-        var pr = response.values[i];
+    for (var i = 0; i < resp.values.length; i++) {
+        var pr = resp.values[i];
         // if (pr.fromRef.displayId.indexOf(ticket) > -1 && pr.open === true) {
         if(pr.open === true) {
             console.log('Found matching pull request ', pr.fromRef.displayId);

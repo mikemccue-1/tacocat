@@ -1,8 +1,10 @@
 {
     "stashUser": "STASH_USER_WE_CAN_SHARE",
     "stashPassword": "STASH_USER_PASSWORD",
-    "stashRoot": "root with trailing slash to stash server",
-    "stashProject": "stash project like XYZABC",
-    "stashRepo": "the stash repository like MyRepo",
-    "stashPollDelay": 4000
+    "stashRoot": "https://stash.paylocity.com/",
+    "stashProject": "TAL",
+    "stashRepo": "recruiting",
+    "stashPollDelay": 4000,
+    "pullRequestNotificationDelay": 900000,
+    "slackToken": "xoxb-36292465760-eqsuT9u9J467RjSb1qsRbZdj"
 }
