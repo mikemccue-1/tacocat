@@ -5,6 +5,7 @@ config.json
 logs
 *.log
 npm-debug.log*
+config.json
 
 # Runtime data
 pids
@@ -32,6 +33,7 @@ jspm_packages
 
 # Optional npm cache directory
 .npm
+
 
 # Optional REPL history
 .node_repl_history
