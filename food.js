@@ -31,7 +31,7 @@ var ingredients = [
     'tuna', 'salmon', 'milk'
 ];
 
-export function checkFoodMessages(message) {
+export function checkFoodMessages(message, rtm) {
     // <@U128LDPNC>
     if (notHungryTriggers.some((exp) => exp.test(message.text))) {
         rtm.sendMessage('Thanks for sharing, <@' + message.user + '>',
