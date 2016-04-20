@@ -1,0 +1,8 @@
+{
+    "stashUser": "STASH_USER_WE_CAN_SHARE",
+    "stashPassword": "STASH_USER_PASSWORD",
+    "stashRoot": "root with trailing slash to stash server",
+    "stashProject": "stash project like XYZABC",
+    "stashRepo": "the stash repository like MyRepo",
+    "stashPollDelay": 4000
+}

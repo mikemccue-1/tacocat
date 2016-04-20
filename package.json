@@ -1,0 +1,20 @@
+{
+  "name": "tacocat",
+  "version": "0.0.0",
+  "description": "A Supreme bot",
+  "main": "server.js",
+  "author": "Team Supreme",
+  "dependencies": {
+    "async": "~0.2.8",
+    "express": "~3.2.4",
+    "slack-client": "^2.0.4",
+    "socket.io": "~0.9.14"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "devDependencies": {
+    "request": "^2.72.0"
+  },
+  "license": "ISC"
+}
