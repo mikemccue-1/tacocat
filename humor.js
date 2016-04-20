@@ -42,7 +42,7 @@ let tacoCatMessages = [
 
 let triggerList = [
     { triggers: rushTriggers, messages: rushMessages },
-    { triggers: whiteCastleMessages, messages: whiteCastleMessages },
+    { triggers: whiteCastleTriggers, messages: whiteCastleMessages },
     { triggers: banjoMusic, messages: banjoMusicMessages },
 ];
 
