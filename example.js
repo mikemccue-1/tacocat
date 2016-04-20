@@ -1,5 +1,6 @@
 import Stash from './stash.js';
 import config from './config.json';
+import messages from './messages.js';
 
 const stashClient = new Stash({
   root: config.stashRoot,
@@ -53,7 +54,9 @@ rtm.on(RTM_CLIENT_EVENTS.RTM_CONNECTION_OPENED, function() {
     const openPullRequests = resp.values.filter((pr) => pr.open);
     
     if(openPullRequests.length > 0) {
-      rtm.sendMessage(`Hey motha fuckas, we got ${openPullRequests.length} PULL REQUESTS be open! Git on that shit!`,
+      var message = messages.pr_messages(openPullRequests.length);
+      
+      rtm.sendMessage(message,
         'C03KL4SUN',
         () => console.log('message sent brah')
       );

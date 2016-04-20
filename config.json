@@ -1,5 +1,5 @@
 {
-    "stashUser": "STASH_USER_WE_CAN_SHARE",
+    "stashUser": "cruisecontrol",
     "stashPassword": "STASH_USER_PASSWORD",
     "stashRoot": "https://stash.paylocity.com/",
     "stashProject": "TAL",
