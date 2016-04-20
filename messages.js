@@ -1,15 +1,18 @@
-export function pr_messages(count) {
+export function pr_messages(pr_array) {
+    
+    var links = pr_array.map((pr) => pr.links.self[0].href).join('\n');
+    
     var possibles = [
-        "Hey homeos, we got " + count + " PULL REQUESTS be open! Git on that shit!",
-        "" + count + " PR's outstanding",
-        "Yo yo! " + count + " PR's outstanding... out-effing-standing...",
-        "I have HAD IT with these " + count + " monkey fightin' PRs on this monday-to-friday repository!",
-        "BANG! " + count + " pull requests still open! -- Oh I'm sorry, did I break your concentration?"
+        "Hey homeos, we got " + pr_array.length + " PULL REQUESTS be open! Git on that shit!",
+        "" + pr_array.length + " PR's outstanding",
+        "Yo yo! " + pr_array.length + " PR's outstanding... out-effing-standing...",
+        "I have HAD IT with these " + pr_array.length + " monkey fightin' PRs on this monday-to-friday repository!",
+        "BANG! " + pr_array.length + " pull requests still open! -- Oh I'm sorry, did I break your concentration?"
     ];
 
     var which = getRandomInt(0, possibles.length - 1);
 
-    return possibles[which];
+    return possibles[which] + '\n' + links;
 
 }
 

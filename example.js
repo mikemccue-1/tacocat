@@ -54,7 +54,7 @@ rtm.on(RTM_CLIENT_EVENTS.RTM_CONNECTION_OPENED, function() {
     const openPullRequests = resp.values.filter((pr) => pr.open);
     
     if(openPullRequests.length > 0) {
-      var message = messages.pr_messages(openPullRequests.length);
+      var message = messages.pr_messages(openPullRequests);
       
       rtm.sendMessage(message,
         'C03KL4SUN',
