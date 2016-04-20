@@ -61,7 +61,7 @@ addTrigger([/bug/i], ["Can't we just write code without bugs?", "We wouldn't hav
 addTrigger([/(stand up|standup)]/i, ["I'm not going to make it to the next standup ... hair ball...", "Let me know how standup goes... I'm taking a nap.", "I'd attend standup, but I have a massive hangover."]);
 addTrigger([/(sandbox|sand box|sandboxes)]/i, ["Uh, sorry guys, I thought that was the LITTER box...", "When you next use that sandbox, you're going to need a scoop.", "I'm using the sandbox right now. A little privacy please?"]);
 
-export function checkFoodMessages(message, rtm) {
+export function humorMessages(message, rtm) {
     // <@U128LDPNC>
     triggerList.forEach((trigger) => {
         if(trigger.triggers.some((exp) => exp.test(message.text))) {
