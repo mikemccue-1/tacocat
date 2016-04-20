@@ -1,6 +1,6 @@
-import Stash from './stash.js';
+import Stash from './stash/stash.js';
 import config from './config.json';
-import messages from './messages.js';
+import * as messages from './messages.js';
 
 const stashClient = new Stash({
   root: config.stashRoot,
