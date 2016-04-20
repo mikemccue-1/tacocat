@@ -44,6 +44,7 @@ let triggerList = [
     { triggers: rushTriggers, messages: rushMessages },
     { triggers: whiteCastleTriggers, messages: whiteCastleMessages },
     { triggers: banjoMusic, messages: banjoMusicMessages },
+    { triggers: tacocat, messages: tacoCatMessages }
 ];
 
 function addTrigger(triggers, messages) {
