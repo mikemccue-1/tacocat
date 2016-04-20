@@ -44,6 +44,7 @@ export function checkFoodMessages(message, rtm) {
         var ingredientTwo = ingredients[Math.floor(Math.random() * (ingredients.length - 1))];
         recipe = recipe.replace('{0}', ingredientOne)
             .replace('{1}', ingredientTwo);
-        rtm.sendMessage('I know, <@' + message.user + '>! You should make' + recipe);
+        rtm.sendMessage('I know, <@' + message.user + '>! You should make' + recipe,
+        'C03KL4SUN', () => console.log('Sent food'));
     }
 }
