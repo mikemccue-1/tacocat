@@ -33,12 +33,12 @@ var ingredients = [
 
 export function checkFoodMessages(message) {
     // <@U128LDPNC>
-    if (notHungryTriggers.test(message.text)) {
+    if (notHungryTriggers.some((exp) => exp.test(message.text))) {
         rtm.sendMessage('Thanks for sharing, <@' + message.user + '>',
             'C03KL4SUN', () => console.log('Sent thanks for sharing')
         );
     }
-    else if (hungryTriggers.test(message.text)) {
+    else if (hungryTriggers.some((exp) => exp.test(message.text))) {
         var recipe = foodTemplates[Math.floor(Math.random() * (foodTemplates.length - 1))];
         var ingredientOne = ingredients[Math.floor(Math.random() * (ingredients.length - 1))];
         var ingredientTwo = ingredients[Math.floor(Math.random() * (ingredients.length - 1))];
