@@ -1,10 +1,9 @@
-
-     ,-----.,--.                  ,--. ,---.   ,--.,------.  ,------.
-    '  .--./|  | ,---. ,--.,--. ,-|  || o   \  |  ||  .-.  \ |  .---'
-    |  |    |  || .-. ||  ||  |' .-. |`..'  |  |  ||  |  \  :|  `--, 
-    '  '--'\|  |' '-' ''  ''  '\ `-' | .'  /   |  ||  '--'  /|  `---.
-     `-----'`--' `---'  `----'  `---'  `--'    `--'`-------' `------'
-    ----------------------------------------------------------------- 
+___________                       _________                                          
+\__    ___/___ _____    _____    /   _____/__ _______________   ____   _____   ____  
+  |    |_/ __ \\__  \  /     \   \_____  \|  |  \____ \_  __ \_/ __ \ /     \_/ __ \ 
+  |    |\  ___/ / __ \|  Y Y  \  /        \  |  /  |_> >  | \/\  ___/|  Y Y  \  ___/ 
+  |____| \___  >____  /__|_|  / /_______  /____/|   __/|__|    \___  >__|_|  /\___  >
+             \/     \/      \/          \/      |__|               \/      \/     \/ 
 
 
 Welcome to your Node.js project on Cloud9 IDE!
@@ -13,10 +12,10 @@ This chat example showcases how to use `socket.io` with a static `express` serve
 
 ## Running the server
 
-1) Open `server.js` and start the app by clicking on the "Run" button in the top menu.
+1) Open `app.js` and start the app by clicking on the "Run" button in the top menu.
 
 2) Alternatively you can launch the app from the Terminal:
 
-    $ node server.js
+    $ node app.js
 
 Once the server is running, open the project in the shape of 'https://projectname-username.c9.io/'. As you enter your name, watch the Users list (on the left) update. Once you press Enter or Send, the message is shared with all connected clients.

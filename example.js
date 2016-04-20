@@ -1,6 +1,7 @@
 import Stash from './stash/stash.js';
 import config from './config.json';
 import * as messages from './messages.js';
+import {checkFoodMessages} from './food.js';
 
 const stashClient = new Stash({
   root: config.stashRoot,
@@ -22,6 +23,7 @@ rtm.start();
 
 rtm.on(RTM_EVENTS.MESSAGE, function handleRtmMessage(message) {
   console.log('Message:', message);
+  checkFoodMessages(message, rtm);
 });
 
 rtm.on(RTM_EVENTS.REACTION_ADDED, function handleRtmReactionAdded(reaction) {
