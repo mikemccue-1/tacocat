@@ -103,9 +103,9 @@ function sayPledge(rtm) {
     } else {
         rtm.sendMessage(pledge[pledgeIndex],
         'C03KL4SUN',
-        () => setTimeout(()=>{
+        () => setTimeout(()=> {
             pledgeIndex++;
             sayPledge(rtm);
-        }, 800);
+        }, 800));
     }
 }
