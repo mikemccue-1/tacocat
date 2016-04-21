@@ -1,29 +1,29 @@
 import config from '../config.json';
 import Stash from './stash.js';
 
-const stashClient = new Stash({
-  root: config.stashRoot,
-  projectName: config.stashProject,
-  repo: config.stashRepo
-});
+// const stashClient = new Stash({
+//   root: config.stashRoot,
+//   projectName: config.stashProject,
+//   repo: config.stashRepo
+// });
 
-let lastError = null;
-let lastResponse = {};
+// let lastError = null;
+// let lastResponse = {};
 
-function loop() {
+// function loop() {
     
-    stashClient.getPullRequests((err, resp) => {
-        lastError = err;
-        lastResponse = resp;
-    });
+//     stashClient.getPullRequests((err, resp) => {
+        
+//     });
     
-    setTimeout(() => {
-        loop();
-    }, config.stashPollDelay);
-}
+//     setTimeout(() => {
+//         loop();
+//     }, config.pullRequestNotificationDelay);
+// }
 
-loop();
+// loop();
 
-export function getPullRequests(callBack) {
-    callBack(lastError, lastResponse);
-}
+// export function getPullRequests(callBack) {
+//     callBack(lastError, lastResponse);
+// }
+
