@@ -20,8 +20,8 @@ export function pr_messages(pr_array, rtm) {
     sendTeamMessage(possibles[which], rtm);
     
     pr_array.forEach((pr) => {
-       let approvals = pr.reviewers.filter((app) => app.approved).map((app) => app.name);
-       let notYetApproved = pr.reviewers.filter((app) => !app.approved).map((app) => app.name);
+       let approvals = pr.reviewers.filter((app) => app.approved).map((app) => app.user.name);
+       let notYetApproved = pr.reviewers.filter((app) => !app.approved).map((app) => app.user.name);
        let link = pr.links.self[0].href;
        if(approvals.length > 0 && pr.reviewers.length > approvals.length) {
            sendTeamMessage("C'mon slackers, " + Array.join(approvals, ' and ') + " think this code is just fine. What's taking so long for this one?\n" + link, rtm);
