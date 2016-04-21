@@ -62,6 +62,9 @@ addTrigger([/bug/i], ["Can't we just write code without bugs?", "We wouldn't hav
 addTrigger([/(stand up|standup)/i], ["I'm not going to make it to the next standup ... hair ball...", "Let me know how standup goes... I'm taking a nap.", "I'd attend standup, but I have a massive hangover."]);
 addTrigger([/(sandbox|sand box|sandboxes)/i], ["Uh, sorry guys, I thought that was the LITTER box...", "When you next use that sandbox, you're going to need a scoop.", "I'm using the sandbox right now. A little privacy please?"]);
 
+var isPledging = false;
+var pledgeIndex = 0;
+
 export function humorMessages(message, rtm) {
     // <@U128LDPNC>
     triggerList.forEach((trigger) => {
@@ -71,4 +74,35 @@ export function humorMessages(message, rtm) {
             () => console.log('Sent humor message'));
         }
     });
+    
+    if(/(pledge|allegiance|pledge of allegiance|flag)/i.test(message.text)
+    && !isPledging) {
+        pledgeIndex = 0;
+        sayPledge(rtm);
+    }
+
+}
+var pledge = [
+    "I pledge allegiance",
+    "to the Flag",
+    "of the United States",
+    "of America",
+    "and to the Republic",
+    "for which it stands",
+    "one Nation",
+    "under God",
+    "with liberty",
+    "and justice",
+    "for all."
+];
+function sayPledge(rtm) {
+    if(pledgeIndex >= pledge.length) {
+        isPledging = false;
+        pledgeIndex = 0;
+        return;
+    } else {
+        rtm.sendMessage(pledge[pledgeIndex],
+        'C03KL4SUN',
+        () => setTimeout(()=>sayPledge(rtm), 800);
+    }
 }
