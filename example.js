@@ -1,6 +1,8 @@
 import Stash from './stash/stash.js';
 import config from './config.json';
 import * as messages from './messages.js';
+import {checkFoodMessages} from './food.js';
+import {humorMessages} from './humor.js';
 
 const stashClient = new Stash({
   root: config.stashRoot,
@@ -13,7 +15,7 @@ var RTM_EVENTS = require('slack-client/lib/clients/events/rtm').EVENTS;
 var RTM_CLIENT_EVENTS = require('@slack/client').CLIENT_EVENTS.RTM;
 var request = require('request');
 
-var token = process.env.SLACK_API_TOKEN || 'xoxb-36292465760-eqsuT9u9J467RjSb1qsRbZdj';
+var token = process.env.SLACK_API_TOKEN || config.slackToken;
 
 var rtm = new RtmClient(token, {
   logLevel: 'debug'
@@ -22,6 +24,8 @@ rtm.start();
 
 rtm.on(RTM_EVENTS.MESSAGE, function handleRtmMessage(message) {
   console.log('Message:', message);
+  checkFoodMessages(message, rtm);
+  humorMessages(message, rtm);
 });
 
 rtm.on(RTM_EVENTS.REACTION_ADDED, function handleRtmReactionAdded(reaction) {
