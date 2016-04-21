@@ -29,7 +29,7 @@ var ingredients = [
     'pork', 'fish', 'apple', 'onion', 'death cap mushroom', 'boomerang hammer',
     'marmite', 'squirrel', 'possum',
     'meow-mix', 'fancy feast', 'purina friskies', 'whiskas',
-    'tuna', 'salmon', 'milk'
+    'tuna', 'salmon', 'milk', 'propelyne glycol'
 ];
 
 export function checkFoodMessages(message, rtm) {
