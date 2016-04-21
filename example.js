@@ -72,7 +72,7 @@ function stashReminderLoop() {
 function checkProductionLoop() {
   setTimeout(() => {
     checkProductionLinks();
-  }, conifg.checkProductionDelay || (60 * 5 * 1000));
+  }, config.checkProductionDelay || (60 * 5 * 1000));
 }
 
 function checkProductionLinks() {
@@ -138,6 +138,7 @@ rtm.on(RTM_CLIENT_EVENTS.RTM_CONNECTION_OPENED, function() {
   // });
 
   stashReminderLoop();
+  checkProductionLoop();
   // get pull requests
 });
 // request("http://stash.paylocity.com/rest/api/1.0/projects/TAL/repos/recruiting/pull-requests", function(error, response, body) {
