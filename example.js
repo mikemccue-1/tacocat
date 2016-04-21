@@ -54,7 +54,7 @@ function stashReminderLoop() {
   setTimeout(() => {
     checkPullRequests();
     stashReminderLoop();
-  });
+  }, config.pullRequestNotificationDelay || 90000);
 }
 
 function checkPullRequests() {

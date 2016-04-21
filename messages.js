@@ -8,9 +8,9 @@ export function pr_messages(pr_array, rtm) {
     var links = pr_array.map((pr) => pr.links.self[0].href).join('\n');
     
     var possibles = [
-        "Hey homeos, we got " + pr_array.length + " PULL REQUESTS be open! Git on that shit!",
+        "Hey homeos, we got " + pr_array.length + " PULL REQUESTS be open! It's like a litter box in here!",
         "" + pr_array.length + " PR's outstanding",
-        "Yo yo! " + pr_array.length + " PR's outstanding... out-effing-standing...",
+        "Yo yo! " + pr_array.length + " PR's outstanding...",
         "I have HAD IT with these " + pr_array.length + " monkey fightin' PRs on this monday-to-friday repository!",
         "BANG! " + pr_array.length + " pull requests still open! -- Oh I'm sorry, did I break your concentration?"
     ];
