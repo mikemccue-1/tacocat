@@ -84,6 +84,9 @@ export function humorMessages(message, rtm) {
 
 }
 var pledge = [
+    "OKAY, SUPREMES...",
+    "GET READY...",
+    "AAAAAND...",
     "I pledge allegiance",
     "to the Flag",
     "of the United States",
@@ -97,6 +100,11 @@ var pledge = [
     "and justice",
     "for all.\r\nhttp://politicalillusionsexposed.com/wp-content/uploads/2014/11/Grumpiest-Patriot.gif"
 ];
+export function startPledge(rtm) {
+    pledgeIndex = 0;
+    isPledging = true;
+    sayPledge(rtm);
+}
 function sayPledge(rtm) {
     if(pledgeIndex >= pledge.length) {
         isPledging = false;

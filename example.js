@@ -6,7 +6,8 @@ import {
 }
 from './food.js';
 import {
-  humorMessages
+  humorMessages,
+  startPledge
 }
 from './humor.js';
 
@@ -29,6 +30,10 @@ var rtm = new RtmClient(token, {
 rtm.start();
 
 rtm.on(RTM_EVENTS.MESSAGE, function handleRtmMessage(message) {
+  if(/(start standup|start scrum)/i.test(message.text)) {
+    startPledge(rtm);
+    return;
+  }
   console.log('Message:', message);
   checkFoodMessages(message, rtm);
   humorMessages(message, rtm);
