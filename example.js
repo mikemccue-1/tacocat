@@ -32,7 +32,9 @@ rtm.on(RTM_EVENTS.MESSAGE, function handleRtmMessage(message) {
   console.log('Message:', message);
   checkFoodMessages(message, rtm);
   humorMessages(message, rtm);
+  console.log('Checking for the any prs notification');
   if(/any prs/i.test(message)) {
+    console.log('Found any prs notification');
     checkPullRequests(); // DO IT NAOW!
   }
 });
@@ -60,6 +62,7 @@ function stashReminderLoop() {
 function checkPullRequests() {
     try {
       stashClient.getPullRequests((err, resp) => {
+        console.log('Got response for checkPullRequests');
         if (resp === undefined) {
           sendTeamMessage("Stash has lost it. I asked it for pull requests, it said 'undefined'.");
           return;
@@ -72,10 +75,10 @@ function checkPullRequests() {
         if (openPullRequests.length > 0) {
           var message = messages.pr_messages(openPullRequests, rtm);
         }
-        stashReminderLoop();
-      }, config.pullRequestNotificationDelay);
+      });
     }
     catch (e) {
+      console.log('An error happened with checkPullRequests');
       sendTeamMessage("Stash must be having a bad day. I asked it for pull requests. It said", e.message);
     }
 }
