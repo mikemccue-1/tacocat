@@ -38,7 +38,7 @@ rtm.on(RTM_EVENTS.MESSAGE, function handleRtmMessage(message) {
   checkFoodMessages(message, rtm);
   humorMessages(message, rtm);
   console.log('Checking for the any prs notification');
-  if (/any prs/i.test(message.text)) {
+  if (/(any prs|any pull requests|any pr's|have prs|have pr's)/i.test(message.text)) {
     console.log('Found any prs notification');
     checkPullRequests(true); // DO IT NAOW!
   }
