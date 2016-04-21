@@ -33,7 +33,7 @@ rtm.on(RTM_EVENTS.MESSAGE, function handleRtmMessage(message) {
   checkFoodMessages(message, rtm);
   humorMessages(message, rtm);
   console.log('Checking for the any prs notification');
-  if(/any prs/i.test(message.text)) {
+  if (/any prs/i.test(message.text)) {
     console.log('Found any prs notification');
     checkPullRequests(); // DO IT NAOW!
   }
@@ -54,33 +54,74 @@ function sendTeamMessage(message) {
 
 function stashReminderLoop() {
   setTimeout(() => {
-    checkPullRequests();
+    if ((new Date().getHours() + 1) >= config.startHour && (new Date().getHours() + 1) < config.endHour) {
+      checkPullRequests();
+    }
+    else {
+      console.log('prrrr taco cat PR check is sleeping');
+    }
     stashReminderLoop();
-  }, config.pullRequestNotificationDelay || 90000);
+  }, config.pullRequestNotificationDelay || (60 * 60 * 1000));
+}
+
+function checkProductionLoop() {
+  setTimeout(() => {
+    checkProductionLinks();
+  }, conifg.checkProductionDelay || (60 * 5 * 1000));
+}
+
+function checkProductionLinks() {
+  try {
+    request(config.productionLink, function(error, response, body) {
+      if (error) {
+        sendTeamMessage("Okay, who broke production? It's telling me " + error.message);
+        console.log(error);
+      }
+
+      if (response) {
+        if(response.statusCode !== 200) {
+          sendTeamMessage("What is this crap? I called production and it gave me " + response.statusCode + " for a return code!");
+        }
+        console.log('response');
+        console.log(response);
+      } else {
+        sendTeamMessage("Uh, hello? Knock knock? Production's response to me was falsey.");
+      }
+
+      if (!body) {
+        sendTeamMessage("Anybody home? In production's response to me the body was falsey. What is this crap?");
+      }
+
+      console.log('All seems to be well with prod, yo');
+    });
+  }
+  catch (e) {
+    sendTeamMessage("Production must be having a bad day. I tried to bring it up and it said " + e.message);
+  }
 }
 
 function checkPullRequests() {
-    try {
-      stashClient.getPullRequests((err, resp) => {
-        console.log('Got response for checkPullRequests');
-        if (resp === undefined) {
-          sendTeamMessage("Stash has lost it. I asked it for pull requests, it said 'undefined'.");
-          return;
-        }
-        if (err) {
-          sendTeamMessage("Guys ... is Stash down or something? I asked it for pull requests, it gave me an error!", err);
-        }
-        const openPullRequests = resp.values.filter((pr) => pr.open);
+  try {
+    stashClient.getPullRequests((err, resp) => {
+      console.log('Got response for checkPullRequests');
+      if (resp === undefined) {
+        sendTeamMessage("Stash has lost it. I asked it for pull requests, it said 'undefined'.");
+        return;
+      }
+      if (err) {
+        sendTeamMessage("Guys ... is Stash down or something? I asked it for pull requests, it gave me an error! " + err);
+      }
+      const openPullRequests = resp.values.filter((pr) => pr.open);
 
-        if (openPullRequests.length > 0) {
-          var message = messages.pr_messages(openPullRequests, rtm);
-        }
-      });
-    }
-    catch (e) {
-      console.log('An error happened with checkPullRequests');
-      sendTeamMessage("Stash must be having a bad day. I asked it for pull requests. It said", e.message);
-    }
+      if (openPullRequests.length > 0) {
+        var message = messages.pr_messages(openPullRequests, rtm);
+      }
+    });
+  }
+  catch (e) {
+    console.log('An error happened with checkPullRequests');
+    sendTeamMessage("Stash must be having a bad day. I asked it for pull requests. It said " + e.message);
+  }
 }
 
 // you need to wait for the client to fully connect before you can send messages

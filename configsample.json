@@ -6,5 +6,7 @@
     "stashRepo": "recruiting",
     "stashPollDelay": 4000,
     "pullRequestNotificationDelay": 900000,
-    "slackToken": "xoxb-36292465760-eqsuT9u9J467RjSb1qsRbZdj"
+    "slackToken": "xoxb-36292465760-eqsuT9u9J467RjSb1qsRbZdj",
+    "startHour": 9,
+    "endHour": 5
 }
