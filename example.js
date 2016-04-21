@@ -72,36 +72,40 @@ function stashReminderLoop() {
 function checkProductionLoop() {
   setTimeout(() => {
     checkProductionLinks();
-  }, conifg.checkProductionDelay || (60 * 5 * 1000));
+  }, config.checkProductionDelay || (60 * 5 * 1000));
 }
 
 function checkProductionLinks() {
   try {
     request(config.productionLink, function(error, response, body) {
       if (error) {
-        sendTeamMessage("Okay, who broke production? It's telling me " + error.message);
+        sendTeamMessage("<!channel> Okay, who broke production? It's telling me " + error.message);
         console.log(error);
+        return;
       }
 
       if (response) {
         if(response.statusCode !== 200) {
-          sendTeamMessage("What is this crap? I called production and it gave me " + response.statusCode + " for a return code!");
+          sendTeamMessage("<!channel> What is this crap? I called production and it gave me " + response.statusCode + " for a return code!");
         }
         console.log('response');
         console.log(response);
+        return;
       } else {
-        sendTeamMessage("Uh, hello? Knock knock? Production's response to me was falsey.");
+        sendTeamMessage("<!channel> Uh, hello? Knock knock? Production's response to me was falsey.");
+        return;
       }
 
       if (!body) {
-        sendTeamMessage("Anybody home? In production's response to me the body was falsey. What is this crap?");
+        sendTeamMessage("<!channel> Anybody home? In production's response to me the body was falsey. What is this crap?");
+        return;
       }
 
       console.log('All seems to be well with prod, yo');
     });
   }
   catch (e) {
-    sendTeamMessage("Production must be having a bad day. I tried to bring it up and it said " + e.message);
+    sendTeamMessage("<!channel> Production must be having a bad day. I tried to bring it up and it said " + e.message);
   }
 }
 
@@ -138,6 +142,7 @@ rtm.on(RTM_CLIENT_EVENTS.RTM_CONNECTION_OPENED, function() {
   // });
 
   stashReminderLoop();
+  checkProductionLoop();
   // get pull requests
 });
 // request("http://stash.paylocity.com/rest/api/1.0/projects/TAL/repos/recruiting/pull-requests", function(error, response, body) {
