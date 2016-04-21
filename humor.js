@@ -90,8 +90,8 @@ var pledge = [
     "and to the Republic",
     "for which it stands",
     "one Nation",
-    "indivisible",
     "under God",
+    "indivisible",
     "with liberty",
     "and justice",
     "for all.\r\nhttp://politicalillusionsexposed.com/wp-content/uploads/2014/11/Grumpiest-Patriot.gif"
