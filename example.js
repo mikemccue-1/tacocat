@@ -40,7 +40,7 @@ rtm.on(RTM_EVENTS.MESSAGE, function handleRtmMessage(message) {
   console.log('Checking for the any prs notification');
   if (/any prs/i.test(message.text)) {
     console.log('Found any prs notification');
-    checkPullRequests(); // DO IT NAOW!
+    checkPullRequests(true); // DO IT NAOW!
   }
 });
 
@@ -105,7 +105,7 @@ function checkProductionLinks() {
   }
 }
 
-function checkPullRequests() {
+function checkPullRequests(userPrompted) {
   try {
     stashClient.getPullRequests((err, resp) => {
       console.log('Got response for checkPullRequests');
@@ -120,6 +120,8 @@ function checkPullRequests() {
 
       if (openPullRequests.length > 0) {
         var message = messages.pr_messages(openPullRequests, rtm);
+      } else if(userPrompted) {
+        messages.pr_messages([], rtm);
       }
     });
   }

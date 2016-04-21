@@ -5,6 +5,19 @@ function sendTeamMessage(message, rtm) {
 
 export function pr_messages(pr_array, rtm) {
     
+    if(pr_array.length === 0) {
+        sendTeamMessage(getRandomElement([
+            "Nope. No PRs.",
+            "Ugh, why don't you check yourself? ...Nope, no prs.",
+            "You developers are so lazy. No PRs for you.",
+            "None. Zilch. Nada.",
+            "You have as many PRs as I have bugs in my code.",
+            "How do I put this? None.",
+            "zzz zzzz zzzzz ... zero!"
+            ]), rtm);
+        return;
+    }
+    
     var links = pr_array.map((pr) => pr.links.self[0].href).join('\n');
     
     var possibles = [
