@@ -106,6 +106,6 @@ function sayPledge(rtm) {
         () => setTimeout(()=> {
             pledgeIndex++;
             sayPledge(rtm);
-        }, 800));
+        }, 1500));
     }
 }
