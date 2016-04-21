@@ -78,6 +78,7 @@ export function humorMessages(message, rtm) {
     if(/(pledge|allegiance|pledge of allegiance|flag)/i.test(message.text)
     && !isPledging) {
         pledgeIndex = 0;
+        isPledging = true;
         sayPledge(rtm);
     }
 
