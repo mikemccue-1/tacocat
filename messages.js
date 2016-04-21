@@ -24,7 +24,7 @@ export function pr_messages(pr_array, rtm) {
        let notYetApproved = pr.reviewers.filter((app) => !app.approved).map((app) => app.name);
        let link = pr.links.self[0].href;
        if(approvals.length > 0 && pr.reviewers.length > approvals.length) {
-           sendTeamMessage("C'mon slackers, ", Array.join(approvals, ' and '), " think this code is just fine. What's taking so long for this one?\n" + link, rtm);
+           sendTeamMessage("C'mon slackers, " + Array.join(approvals, ' and ') + " think this code is just fine. What's taking so long for this one?\n" + link, rtm);
        } else if(approvals.length === pr.reviewers.length) {
            sendTeamMessage(getRandomElement(["Seriously!? Everybody who is a reviewer on this PR thinks it's ace. Why isn't this merged?",
            "Everybody loves this PR! C'mon! Merge this!"]) + "\n" + link, rtm);
