@@ -83,17 +83,17 @@ export function humorMessages(message, rtm) {
 
 }
 var pledge = [
-    "I pledge allegiance\r\nhttp://www.usaflagsupply.com/media/catalog/product/cache/1/image/5e06319eda06f020e43594a9c230972d/f/i/file_3_3.jpg",
-    "to the Flag\r\nhttp://www.telegraphcrossfit.com/wp-content/uploads/2013/07/american-flag-2-300x225.jpg",
-    "of the United States\r\nhttp://cdn.playbuzz.com/cdn/0fe850d3-4834-4bc8-8d1c-86f8e72e0610/dee06b7c-a184-43fd-901d-3a4d796b0d06.jpg",
-    "of America\r\nhttps://s-media-cache-ak0.pinimg.com/236x/66/0b/93/660b93b2d27998dd7c4149581cbda12e.jpg",
-    "and to the Republic\r\nhttp://micahburkette.com/wp-content/uploads/2012/02/407302_10151222117605401_827685400_22137879_319074720_n.jpg",
-    "for which it stands\r\nhttp://7-themes.com/data_images/out/8/6793634-free-patriotic-wallpaper.jpg",
-    "one Nation\r\nhttps://cdn3.volusion.com/qr294.ndw29/v/vspfiles/photos/LB-11187-4.jpg?1455492827",
-    "indivisible\r\nhttps://s-media-cache-ak0.pinimg.com/736x/13/26/5e/13265e88790ebd339353ded0ac4bc95a.jpg",
-    "under God\r\nhttp://www.freeweekly.com/wp-content/uploads/2014/07/TFW-7.3.14-A1.jpg",
-    "with liberty\r\nhttp://www.porterfieldsfineart.com/images/Patriotic%20Kittens72.jpg",
-    "and justice\r\nhttp://cdn01.dailycaller.com/wp-content/uploads/2012/11/Cat-1-e1352318861701.jpg",
+    "I pledge allegiance",
+    "to the Flag",
+    "of the United States",
+    "of America",
+    "and to the Republic",
+    "for which it stands",
+    "one Nation",
+    "indivisible",
+    "under God",
+    "with liberty",
+    "and justice",
     "for all.\r\nhttp://politicalillusionsexposed.com/wp-content/uploads/2014/11/Grumpiest-Patriot.gif"
 ];
 function sayPledge(rtm) {
