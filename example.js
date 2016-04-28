@@ -53,7 +53,7 @@ rtm.on(RTM_EVENTS.REACTION_REMOVED, function handleRtmReactionRemoved(reaction) 
 });
 
 function sendTeamMessage(message) {
-  rtm.sendMessage(message, 'C03KL4SUN', () => console.log('Sent', message));
+  rtm.sendMessage(message, 'G14H5AM1R', () => console.log('Sent', message));
   console.log('Sending', message);
 }
 

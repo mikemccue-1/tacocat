@@ -36,7 +36,7 @@ export function checkFoodMessages(message, rtm) {
     // <@U128LDPNC>
     if (notHungryTriggers.some((exp) => exp.test(message.text))) {
         rtm.sendMessage('Thanks for sharing, <@' + message.user + '>',
-            'C03KL4SUN', () => console.log('Sent thanks for sharing')
+            'G14H5AM1R', () => console.log('Sent thanks for sharing')
         );
     }
     else if (hungryTriggers.some((exp) => exp.test(message.text))) {
@@ -46,6 +46,6 @@ export function checkFoodMessages(message, rtm) {
         recipe = recipe.replace('{0}', ingredientOne)
             .replace('{1}', ingredientTwo);
         rtm.sendMessage('I know, <@' + message.user + '>! You should make ' + recipe,
-        'C03KL4SUN', () => console.log('Sent food'));
+        'G14H5AM1R', () => console.log('Sent food'));
     }
 }

@@ -70,7 +70,7 @@ export function humorMessages(message, rtm) {
     triggerList.forEach((trigger) => {
         if(trigger.triggers.some((exp) => exp.test(message.text))) {
             rtm.sendMessage(trigger.messages[Math.floor(Math.random() * trigger.messages.length - 1)],
-            'C03KL4SUN',
+            'G14H5AM1R',
             () => console.log('Sent humor message'));
         }
     });
@@ -112,7 +112,7 @@ function sayPledge(rtm) {
         return;
     } else {
         rtm.sendMessage(pledge[pledgeIndex],
-        'C03KL4SUN',
+        'G14H5AM1R',
         () => setTimeout(()=> {
             pledgeIndex++;
             sayPledge(rtm);
