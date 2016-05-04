@@ -1,6 +1,8 @@
 import Stash from './stash/stash.js';
 import config from './config.json';
+import prompt from 'prompt';
 import * as messages from './messages.js';
+import * as teamcity from './teamcity/teamcity.js';
 import {
   checkFoodMessages
 }
@@ -29,6 +31,18 @@ var rtm = new RtmClient(token, {
 });
 rtm.start();
 
+prompt.start();
+function promptLoop() {
+  prompt.get(['message'], function (err, result) {
+    if(err) { console.log('ERROR ==================================', err.message)}
+    console.log('Sending', result.message);
+    sendTeamMessage(result.message);
+    promptLoop();
+  });
+}
+promptLoop();
+
+
 rtm.on(RTM_EVENTS.MESSAGE, function handleRtmMessage(message) {
   if(/(start standup|start scrum)/i.test(message.text)) {
     startPledge(rtm);
@@ -53,7 +67,7 @@ rtm.on(RTM_EVENTS.REACTION_REMOVED, function handleRtmReactionRemoved(reaction) 
 });
 
 function sendTeamMessage(message) {
-  rtm.sendMessage(message, 'G14H5AM1R', () => console.log('Sent', message));
+  rtm.sendMessage(message, config.room, () => console.log('Sent', message));
   console.log('Sending', message);
 }
 
@@ -67,6 +81,51 @@ function stashReminderLoop() {
     }
     stashReminderLoop();
   }, config.pullRequestNotificationDelay || (60 * 60 * 1000));
+}
+
+
+
+var isFirstTeamCityCheck = true;
+function checkTeamCityLoop() {
+  setTimeout(() => {
+    teamcity.getNewFailedBuilds((builds) => {
+      //cache all the current build failures (no need to report on those right away)
+      if(isFirstTeamCityCheck) {
+        isFirstTeamCityCheck = false;
+        checkTeamCityLoop();
+      } else {
+        if(builds.length > 0) {
+          //get the build details for each failure
+          var waitingOn = builds.length;
+          var buildDetails = [];
+          for(var i = 0; i < builds.length; i++) {
+            teamcity.getBuildDetail(builds[i].id, (build) => {
+              buildDetails.push(build);
+              waitingOn--;
+
+              if(waitingOn <= 0) {
+                //We're done
+                let buildString = '';
+                buildDetails.forEach((bd) => {
+                  let changes = '';
+                  bd.lastChanges.change.forEach((change) => {
+                    changes = changes ? ` and ${change.username}` : change.username;
+                  });
+                  buildString += `${bd.buildType.name} triggered by ${bd.triggered.details} last changes from ${changes}\r\n`;
+                });
+                sendTeamMessage('Oh, man, you guys totally FAILED some builds\r\n' + buildString);
+                console.log(buildString);
+                // console.log(buildDetails[0].buildType.name,'triggered by', buildDetails[0].triggered.details,'last changes from',buildDetails[0].lastChanges.change[0].username);
+
+                checkTeamCityLoop();
+              }
+            });
+          }
+        }
+      }
+
+    });
+  }, config.checkTeamCityDelay || (60 * 5 * 1000));
 }
 
 function checkProductionLoop() {
@@ -145,6 +204,7 @@ rtm.on(RTM_CLIENT_EVENTS.RTM_CONNECTION_OPENED, function() {
 
   stashReminderLoop();
   checkProductionLoop();
+  checkTeamCityLoop();
   // get pull requests
 });
 // request("http://stash.paylocity.com/rest/api/1.0/projects/TAL/repos/recruiting/pull-requests", function(error, response, body) {

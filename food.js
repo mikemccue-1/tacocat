@@ -1,3 +1,5 @@
+import config from './config.json';
+
 var hungryTriggers = [
     /^\/me is (still |also |now )?hungry|continues being hungry/i,
     /^(i( am|\'m) hungry|(suggest|dispense|invent) (meal|food))/i,
@@ -36,7 +38,7 @@ export function checkFoodMessages(message, rtm) {
     // <@U128LDPNC>
     if (notHungryTriggers.some((exp) => exp.test(message.text))) {
         rtm.sendMessage('Thanks for sharing, <@' + message.user + '>',
-            'G14H5AM1R', () => console.log('Sent thanks for sharing')
+            config.room, () => console.log('Sent thanks for sharing')
         );
     }
     else if (hungryTriggers.some((exp) => exp.test(message.text))) {
@@ -46,6 +48,6 @@ export function checkFoodMessages(message, rtm) {
         recipe = recipe.replace('{0}', ingredientOne)
             .replace('{1}', ingredientTwo);
         rtm.sendMessage('I know, <@' + message.user + '>! You should make ' + recipe,
-        'G14H5AM1R', () => console.log('Sent food'));
+        config.room, () => console.log('Sent food'));
     }
 }
