@@ -3,6 +3,7 @@ import config from './config.json';
 import prompt from 'prompt';
 import * as messages from './messages.js';
 import * as teamcity from './teamcity/teamcity.js';
+import * as deployments from './deploy/deploy.js';
 import {
   checkFoodMessages
 }
@@ -18,6 +19,16 @@ const stashClient = new Stash({
   projectName: config.stashProject,
   repo: config.stashRepo
 });
+
+let quietMode = false;
+if(process.argv && process.argv.length) {
+  process.argv.forEach((val,index,arr) => {
+    if(val === '--no-respond') {
+      quietMode = true;
+      console.log('Quiet mode engaged!');
+    }
+  });
+}
 
 var RtmClient = require('slack-client/lib/clients/rtm/client');
 var RTM_EVENTS = require('slack-client/lib/clients/events/rtm').EVENTS;
@@ -44,17 +55,22 @@ promptLoop();
 
 
 rtm.on(RTM_EVENTS.MESSAGE, function handleRtmMessage(message) {
-  if(/(start standup|start scrum)/i.test(message.text)) {
-    startPledge(rtm);
-    return;
-  }
-  console.log('Message:', message);
-  checkFoodMessages(message, rtm);
-  humorMessages(message, rtm);
-  console.log('Checking for the any prs notification');
-  if (/(any prs|any pull requests|any pr's|have prs|have pr's)/i.test(message.text)) {
-    console.log('Found any prs notification');
-    checkPullRequests(true); // DO IT NAOW!
+  if(!quietMode) {
+    if(/(start standup|start scrum)/i.test(message.text)) {
+      startPledge(rtm);
+      return;
+    }
+    console.log('Message:', message);
+    checkFoodMessages(message, rtm);
+    humorMessages(message, rtm);
+    deployments.checkDeploymentMessages(message, rtm);
+    console.log('Checking for the any prs notification');
+    if (/(any prs|any pull requests|any pr's|have prs|have pr's)/i.test(message.text)) {
+      console.log('Found any prs notification');
+      checkPullRequests(true); // DO IT NAOW!
+    }
+  } else {
+    console.log('Quiet mode, not responding to messages...');
   }
 });
 
@@ -207,21 +223,3 @@ rtm.on(RTM_CLIENT_EVENTS.RTM_CONNECTION_OPENED, function() {
   checkTeamCityLoop();
   // get pull requests
 });
-// request("http://stash.paylocity.com/rest/api/1.0/projects/TAL/repos/recruiting/pull-requests", function(error, response, body) {
-// if (error) {
-//   console.log('error');
-//   console.log(error);
-// }
-
-// if (response) {
-//   console.log('response');
-//   console.log(response);
-// }
-
-// if (body) {
-//   console.log('body');
-//   console.log(body);
-// }
-
-// });
-// });
